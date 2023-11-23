@@ -7,6 +7,6 @@
     <title>Super Dashboard</title>
 </head>
 <body>
-    <h1>Super Dashboard</h1>
+    <h1>hi Dashboard</h1>
 </body>
 </html>
