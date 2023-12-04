@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="auto">
 <head>
+    <!-- Meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
+    <!-- Favicon -->
     <link rel="icon" href="{{ asset("frontend/assets/img/babak.png")}}" type="image/png">
     <title>{{ config('app.name') }} | {{ __('Register') }}</title>
 
     <!-- Scripts -->
-	  <script src="{{ asset('js/app.js') }}" defer></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
-      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js'></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js'></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <!-- RTL and LTR styles (commented out) -->
     {{-- @if(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale()=='ar')
     <style>
       body{
@@ -48,82 +51,34 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/assets/css/register.css') }}" rel="stylesheet">
-
-    <script type='text/javascript'>
-        function addFields(){
-            // Generate a dynamic number of inputs
-            var number = document.getElementById("partners").value;
-            document.getElementById("partsp").textContent = number;
-
-            // Get the element where the inputs will be added to
-            var container = document.getElementById("container");
-            // Remove every children it had before
-            while (container.hasChildNodes()) {
-                container.removeChild(container.lastChild);
-            }
-            if (number <= 7){
-                for (i=0;i<number;i++){
-                    // Append a node with a random text
-                    // container.appendChild(document.createTextNode("Partner Name" ));
-
-                    // Create an <input> element, set its type and name attributes
-                    var nlabel = document.createElement("label");
-                    nlabel.htmlFor = "partner-name";
-                    nlabel.innerHTMLPartner Name') }}"
-                    container.appendChild(nlabel);
-                    var ninput = document.createElement("input");
-                    ninput.type = "text";
-                    ninput.name = "Partner" + i;
-                    ninput.classList.add("form-control");
-                    container.appendChild(ninput);
-
-                    var clabel = document.createElement("label");
-                    clabel.htmlFor = "partner-country";
-                    clabel.innerHTML="{{ __('Partner Country') }}"
-                    container.appendChild(clabel);
-                    var cinput = document.createElement("select");
-                    var countries = <?php echo json_encode($countries_names);?>;
-                    for (var country of countries){
-                        var opt = document.createElement('option');
-                        opt.value = country;
-                        opt.innerHTML = country;
-                        cinput.appendChild(opt);
-                    }
-                    cinput.type = "text";
-                    cinput.name = "Partner_country" + i;
-                    cinput.classList.add("form-control");
-                    container.appendChild(cinput);
-                    // Append a line break
-                    container.appendChild(document.createElement("br"));
-                }
-            }
-        }
-
-    </script>
 </head>
 <body>
-
+    <!-- Video background -->
+    <div class="video-bg">
+      <video width="320" height="240" autoplay loop muted>
+        <source
+          src={{ asset('frontend/assets/img/vid2.mp4')}}
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <!-- Main content container -->
 <div class="container mx-0 mw-100">
-    <div class="row">
-        <div class=" col-md-6   " style=" min-height: 100vh;">
-            <div class="text-center mt-5 pt-5 " >
-                <img class="img-fluid" src="{{ asset("frontend/assets/img/asset_16.png")}}" alt="">
-            </div>
-            <div class="text-center">
-                <h1 class="" style="color: #5e5c5c" >hello</h1>
-                <P class=" mx-5 px-5" style="color: #5e5c5c">desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</P>
-            </div>
-        </div>
-        <div class="col-md-6  mt-5 ">
-            <div class="card mt-5 mb-3 ">
+    <div class="row justify-content-center">
+        <div class="col-md-5 mt-5 ">
+            <!-- Registration form card -->
+            <div class="card mt-5 mb-3 p-4 content">
                 <form method="POST" class="wizardform" action="{{ route('register_user') }}" >
                     @csrf
                     <div class="container">
                         <div id="app">
+                            <!-- Vue.js dynamic step navigation -->
                             <step-navigation :steps="steps" :currentstep="currentstep">
                             </step-navigation>
-
+                            <!-- Vue.js dynamic form steps -->
                             <div v-show="currentstep == 1">
+                                 <!-- Personal information form fields -->
                                 <div class="form-group ">
                                     <label for="name">{{ __('Name') }}</label>
                                     <input id="name" onkeyup="laststep()" type="text" required class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -138,7 +93,7 @@
                                 <div class="form-group">
                                     <label for="email">{{ __('Email') }}</label>
                                     <input id="email" onkeyup="laststep()" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                    <small id="email" class="form-text text-muted">{{ __('emailshare') }}</small>
+                                    <small id="email" class="form-text text-muted">{{ __("We'll never share your email with anyone else.") }}</small>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -174,6 +129,7 @@
                             </div>
 
                             <div v-show="currentstep == 2">
+                                 <!-- Company information form fields -->
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="country">{{ __('Where do you want to establish the company') }}</label>
@@ -231,8 +187,9 @@
                             </div>
 
                             <div v-show="currentstep == 3">
-                                <div class="card">
-                                    <div class="card-header">
+                                <!-- Order data form fields -->
+                                <div class="card content">
+                                    <div class="card-header content-header">
                                         <h3>{{ __('Personal Information') }}</h3>
                                     </div>
                                     <div class="card-body">
@@ -253,8 +210,8 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="card">
-                                    <div class="card-header">
+                                <div class="card content">
+                                    <div class="card-header content-header">
                                         <h3>{{ __('Company Information') }}</h3>
                                     </div>
                                     <div class="card-body">
@@ -295,7 +252,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- Vue.js dynamic step buttons -->
                             <step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged">
                             </step>
 
@@ -314,29 +271,74 @@
                             </script>
 
                             <script type="x-template" id="step-template">
-                                <div class="step-wrapper" :class="stepWrapperClass">
-                                    <button type="button" class="btn btn-outline-primary" @click="lastStep" :disabled="firststep">
+                                <div class="step-wrapper text-center" :class="stepWrapperClass">
+                                    <button type="button" class="btn btn-outline-primary btn-lg" @click="lastStep" :disabled="firststep">
                                         {{ __('Back')}}
                                     </button>
-                                    <button type="button" class="btn btn-outline-primary" @click="nextStep" :disabled="laststep">
+                                    <button type="button" class="btn btn-outline-primary btn-lg" @click="nextStep" :disabled="laststep">
                                         {{ __('Next')}}
                                     </button>
-                                    <button type="submit" class="btn btn-outline-success" v-if="laststep">
+                                    <button type="submit" class="btn btn-outline-success btn-lg" v-if="laststep">
                                         {{ __('Register')}}
                                     </button>
                                 </div>
                             </script>
                         </div>
-
+                <!-- End of registration form card -->
     </div>
 </div>
+<!-- JavaScript functions for dynamic form elements -->
+<script type='text/javascript'>
+    function addFields(){
+        // Function to add dynamic partner fields
+        var number = document.getElementById("partners").value;
+        document.getElementById("partsp").textContent = number;
 
+        // Get the element where the inputs will be added to
+        var container = document.getElementById("container");
+        // Remove every children it had before
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+        }
+        if (number <= 7){
+            for (i=0;i<number;i++){
+                // Append a node with a random text
+                // container.appendChild(document.createTextNode("Partner Name" ));
 
+                // Create an <input> element, set its type and name attributes
+                var nlabel = document.createElement("label");
+                nlabel.htmlFor = "partner-name";
+                nlabel.innerHTML="{{ __('Partner Name') }}";
+                container.appendChild(nlabel);
+                var ninput = document.createElement("input");
+                ninput.type = "text";
+                ninput.name = "Partner" + i;
+                ninput.classList.add("form-control");
+                container.appendChild(ninput);
 
-
-{{-- <script src="{{ asset('frontend/assets/js/valadation.js') }}" async defer></script> --}}
-
-
+                var clabel = document.createElement("label");
+                clabel.htmlFor = "partner-country";
+                clabel.innerHTML="{{ __('Partner Country') }}";
+                container.appendChild(clabel);
+                var cinput = document.createElement("select");
+                var countries = <?php echo json_encode($countries_names);?>;
+                for (var country of countries){
+                    var opt = document.createElement('option');
+                    opt.value = country;
+                    opt.innerHTML = country;
+                    cinput.appendChild(opt);
+                }
+                cinput.type = "text";
+                cinput.name = "Partner_country" + i;
+                cinput.classList.add("form-control");
+                container.appendChild(cinput);
+                // Append a line break
+                container.appendChild(document.createElement("br"));
+            }
+        }
+    }
+</script>
+// Functions to update summary information on the last step
 <script>
     function laststep(){
         // Generate a dynamic number of inputs
@@ -366,13 +368,9 @@
         document.getElementById("capitalsp").textContent = capital;
         document.getElementById("purpsp").textContent = purp;
         document.getElementById("notesp").textContent = note;
-
     }
 </script>
 <script>
-
-
-
     Vue.component("step-navigation-step", {
       template: "#step-navigation-step-template",
 
@@ -529,13 +527,9 @@
                 }
           this.$emit("step-change", this.currentstep + 1);
         },
-
         lastStep() {
           this.$emit("step-change", this.currentstep - 1);
         } } });
-
-
-
     new Vue({
       el: "#app",
 
@@ -558,17 +552,11 @@
           title: "{{ __('Order Data') }}",
           icon_class: "fa fa-solid fa-file" }] },
       methods: {
-
         //create method to validate the form data before moving to the next step (email is email & password match password confirmation)
-
-
-
         stepChanged(step) {
           // check if the step is valid before changing (email is email & password match)
           this.currentstep = step;
         } } });
     </script>
-
 </body>
-
 </html>
