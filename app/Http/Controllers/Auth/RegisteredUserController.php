@@ -59,8 +59,8 @@ class RegisteredUserController extends Controller
     }
 
 
-    
-    protected function create_user(array $data)
+
+    protected function create_user(Request $data)
     {
         $partner = [];
         $partner_country = [];
@@ -98,8 +98,9 @@ class RegisteredUserController extends Controller
             // json_encode($data)
         });
 
-      return $user;
+        Auth::login($user);
 
+        return redirect(RouteServiceProvider::HOME);
     }
 
 }
