@@ -338,9 +338,9 @@
         }
     }
 </script>
-// Functions to update summary information on the last step
 <script>
     function laststep(){
+        // Functions to update summary information on the last step
         // Generate a dynamic number of inputs
         var name = document.getElementById("name").value;
         var email = document.getElementById("email").value;

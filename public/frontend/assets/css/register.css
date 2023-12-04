@@ -107,6 +107,10 @@
   background-color: #ebe1e1bf;
   color: #262424;
 }
+.content input:active{
+  background-color: #ebe1e1bf;
+  color: #262424;
+}
 .content textarea{
   font-size: 18px;
   outline: none;
