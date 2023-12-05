@@ -38,7 +38,6 @@ Route::middleware(['auth','role:super'])->group(function () {
 
 //only views
 
-
 //companies
 Route::get('/dashboard/companies', function () {
     return view('user.companies.index');
@@ -46,6 +45,20 @@ Route::get('/dashboard/companies', function () {
 Route::get('/dashboard/companies/show', function () {
     return view('user.companies.show');
 })->middleware(['auth', 'verified'])->name('companies.show');
+
+//company files
+Route::get('/dashboard/company/files/create', function () {
+    return view('user.company-files.create');
+})->middleware(['auth', 'verified'])->name('company-files.create');
+Route::get('/dashboard/company/files/edit', function () {
+    return view('user.company-files.edit');
+})->middleware(['auth', 'verified'])->name('company-files.edit');
+Route::get('/dashboard/company/files/renew', function () {
+    return view('user.company-files.renew');
+})->middleware(['auth', 'verified'])->name('company-files.renew');
+Route::get('/dashboard/company/files/show', function () {
+    return view('user.company-files.show');
+})->middleware(['auth', 'verified'])->name('company-files.show');
 
 
 //employee
@@ -62,6 +75,20 @@ Route::get('/dashboard/employee/edit', function () {
     return view('user.employee.edit');
 })->middleware(['auth', 'verified'])->name('employee.edit');
 
+//employee files
+Route::get('/dashboard/employee/files/create', function () {
+    return view('user.employee-files.create');
+})->middleware(['auth', 'verified'])->name('employee-files.create');
+Route::get('/dashboard/employee/files/edit', function () {
+    return view('user.employee-files.edit');
+})->middleware(['auth', 'verified'])->name('employee-files.edit');
+Route::get('/dashboard/employee/files/renew', function () {
+    return view('user.employee-files.renew');
+})->middleware(['auth', 'verified'])->name('employee-files.renew');
+Route::get('/dashboard/employee/files/show', function () {
+    return view('user.employee-files.show');
+})->middleware(['auth', 'verified'])->name('employee-files.show');
+
 //sponsored
 // Route::get('/dashboard/sponsored', function () {
 //     return view('user.sponsored.index');
@@ -76,7 +103,21 @@ Route::get('/dashboard/employee/edit', function () {
 //     return view('user.sponsored.edit');
 // })->middleware(['auth', 'verified'])->name('sponsored.edit');
 
-//sponsored
-Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
+//sponsored files
+Route::get('/dashboard/sponsored/files/create', function () {
+    return view('user.sponsored-files.create');
+})->middleware(['auth', 'verified'])->name('sponsored-files.create');
+Route::get('/dashboard/sponsored/files/edit', function () {
+    return view('user.sponsored-files.edit');
+})->middleware(['auth', 'verified'])->name('sponsored-files.edit');
+Route::get('/dashboard/sponsored/files/renew', function () {
+    return view('user.sponsored-files.renew');
+})->middleware(['auth', 'verified'])->name('sponsored-files.renew');
+Route::get('/dashboard/sponsored/files/show', function () {
+    return view('user.sponsored-files.show');
+})->middleware(['auth', 'verified'])->name('sponsored-files.show');
 
+
+//sponsored controller
+Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
 
