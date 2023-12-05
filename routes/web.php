@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperController;
+use App\Http\Controllers\Frontend\Sponsore\SponsoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +75,8 @@ Route::get('/dashboard/sponsored/create', function () {
 Route::get('/dashboard/sponsored/edit', function () {
     return view('user.sponsored.edit');
 })->middleware(['auth', 'verified'])->name('sponsored.edit');
+
+//sponsored
+Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
+ 
+ 
