@@ -78,5 +78,5 @@ Route::get('/dashboard/employee/edit', function () {
 
 //sponsored
 Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
- 
- 
+
+

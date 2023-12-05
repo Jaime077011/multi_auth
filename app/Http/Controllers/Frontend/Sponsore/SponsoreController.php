@@ -21,12 +21,12 @@ class SponsoreController extends Controller
         $employees = Employer::where('user_id', auth()->user()->id)->orderBy('id')->get();
 
         $sponsore = Sponsore::with('user')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
-        
+
         if($request->employer){
             $sponsored = Sponsore::where('employer_id', $request->employer)->orderBy('created_at', 'desc')->paginate(25);
         }
         return view('user.sponsored.index', compact('sponsore', 'employees'));
-  
+
     }
 
     /**
@@ -34,7 +34,7 @@ class SponsoreController extends Controller
      */
     public function create()
     {
-       
+
         $employers = Employer::where('user_id', auth()->user()->id)->orderBy('id')->get();
         $nationalities = Nationality::all();
         $job_titles = jobTitle::all();
@@ -45,16 +45,16 @@ class SponsoreController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {  
+    {
         $request->validate([
             'ar_name' => 'required|string',
             'en_name' => 'required|string',
-            'employer_id' => 'required|exists:employers,id',  
-            'email' => 'required|email|unique:sponsores,email', 
+            'employer_id' => 'required|exists:employers,id',
+            'email' => 'required|email|unique:sponsores,email',
             'phone' => 'required|numeric',
             'gender' => 'required|in:male,female',
-            'nationality_id' => 'required|exists:nationalities,id',  
-            'job_title_id' => 'required|exists:job_titles,id',  
+            'nationality_id' => 'required|exists:nationalities,id',
+            'job_title_id' => 'required|exists:job_titles,id',
             'relative_relation' => 'required|string',
         ]);
         $sponsored = Sponsore::create($request->all());
