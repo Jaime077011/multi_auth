@@ -6,6 +6,7 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+// dark mode
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -55,7 +56,7 @@ themeToggleBtn.addEventListener('click', function() {
     document.dispatchEvent(event);
 
 });
-
+// responsive sidebar
 const sidebar = document.getElementById('sidebar');
 
 if (sidebar) {
