@@ -63,18 +63,18 @@ Route::get('/dashboard/employee/edit', function () {
 })->middleware(['auth', 'verified'])->name('employee.edit');
 
 //sponsored
-Route::get('/dashboard/sponsored', function () {
-    return view('user.sponsored.index');
-})->middleware(['auth', 'verified'])->name('sponsored');
-Route::get('/dashboard/sponsored/show', function () {
-    return view('user.sponsored.show');
-})->middleware(['auth', 'verified'])->name('sponsored.show');
-Route::get('/dashboard/sponsored/create', function () {
-    return view('user.sponsored.create');
-})->middleware(['auth', 'verified'])->name('sponsored.create');
-Route::get('/dashboard/sponsored/edit', function () {
-    return view('user.sponsored.edit');
-})->middleware(['auth', 'verified'])->name('sponsored.edit');
+// Route::get('/dashboard/sponsored', function () {
+//     return view('user.sponsored.index');
+// })->middleware(['auth', 'verified'])->name('sponsored');
+// Route::get('/dashboard/sponsored/show', function () {
+//     return view('user.sponsored.show');
+// })->middleware(['auth', 'verified'])->name('sponsored.show');
+// Route::get('/dashboard/sponsored/create', function () {
+//     return view('user.sponsored.create');
+// })->middleware(['auth', 'verified'])->name('sponsored.create');
+// Route::get('/dashboard/sponsored/edit', function () {
+//     return view('user.sponsored.edit');
+// })->middleware(['auth', 'verified'])->name('sponsored.edit');
 
 //sponsored
 Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
