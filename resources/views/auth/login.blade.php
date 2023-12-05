@@ -52,16 +52,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Babak</title>
-    
+    <link href="{{ asset('frontend/assets/css/login.css') }}" rel="stylesheet">
+
     @vite(['resources/css/app.css','resources/js/app.js'])
 
 </head>
 <body>
-    <section class="bg-gray-50 dark:bg-gray-900">
+    <div class="login-box">
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl text-center pb-7">
+            Login To Your Account
+        </h1>
+        <form method="POST" action="{{ route('login') }}" class="" >
+            @csrf
+            <div class="user-box">
+                <input type="email" name="email" id="email" class="" placeholder="" required="">
+                <label for="email" class="">Your email</label>
+
+            {{-- <input type="text" name="" required="">
+            <label>Username</label> --}}
+          </div>
+          <div class="user-box">
+            <input type="password" name="password" id="password" placeholder="" class="0" required="">
+            <label for="password" class="">Password</label>
+
+            {{-- <input type="password" name="" required="">
+            <label>Password</label> --}}
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input id="remember_me" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" >
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="remember" class="text-white">Remember me</label>
+                </div>
+            </div>
+            <a href="{{ route('password.request') }}" class="text-sm font-medium text-primary-600 hover:underline text-white">Forgot password?</a>
+        </div>
+        <div class="flex justify-center">
+          <button type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Login
+          </button>
+        </div>
+          <p class="text-sm font-light text-white text-center pt-5">
+            Don’t have an account yet? <a href="{{ route('register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+            </p>
+        </form>
+      </div>
+    {{-- <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class=" h-16 mr-2" src="{{ asset("frontend/assets/img/babak.png")}}" alt="logo">
-                
+
             </a>
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -97,6 +143,6 @@
                 </div>
             </div>
         </div>
-      </section>
+      </section> --}}
 </body>
 </html>
