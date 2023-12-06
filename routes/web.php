@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\Companies\CompanyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperController;
@@ -40,12 +41,12 @@ Route::middleware(['auth','role:super'])->group(function () {
 //only views
 
 //companies
-Route::get('/dashboard/companies', function () {
-    return view('user.companies.index');
-})->middleware(['auth', 'verified'])->name('companies');
-Route::get('/dashboard/companies/show', function () {
-    return view('user.companies.show');
-})->middleware(['auth', 'verified'])->name('companies.show');
+// Route::get('/dashboard/companies', function () {
+//     return view('user.companies.index');
+// })->middleware(['auth', 'verified'])->name('companies');
+// Route::get('/dashboard/companies/show', function () {
+//     return view('user.companies.show');
+// })->middleware(['auth', 'verified'])->name('companies.show');
 
 //company files
 Route::get('/dashboard/company/files/create', function () {
@@ -124,4 +125,6 @@ Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['au
 
 //employees 
 Route::resource('dashboard/employee',EmployerController::class )->middleware(['auth', 'verified']);
+//companies
+Route::resource('dashboard/companies', CompanyController::class);
 
