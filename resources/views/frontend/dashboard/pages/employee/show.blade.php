@@ -8,30 +8,30 @@
         <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
             <div>
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Employee Name</h3>
-                <p class="text-gray-500 dark:text-gray-400">mohamed</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ $employer->en_name }}</p>
             </div>
             <div>
 
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Gender</h3>
-                <p class="text-gray-500 dark:text-gray-400">male</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ $employer->gender }}</p>
             </div>
             <div>
 
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Job</h3>
-                <p class="text-gray-500 dark:text-gray-400">Merchandise Displayer OR Window Trimmer</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ $employer->jobTitle->name }}</p>
             </div>
             <div>
 
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Email</h3>
-                <p class="text-gray-500 dark:text-gray-400">g@gmail.com</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ $employer->email }}</p>
             </div>
             <div>
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Phone</h3>
-                <p class="text-gray-500 dark:text-gray-400">01201218354</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ $employer->phone }}</p>
             </div>
             <div>
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Nationallity</h3>
-                <p class="text-gray-500 dark:text-gray-400">Papua New Guinea</p>
+                <p class="text-gray-500 dark:text-gray-400">{{ $employer->nationality->name  }}</p>
             </div>
     </div>
   </section>
@@ -94,7 +94,7 @@
                                 </button>
                             </td>
                         </tr>
-                      
+
                     </tbody>
                 </table>
             </div>

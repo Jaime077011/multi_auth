@@ -63,6 +63,8 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                        @foreach ($employees as $employee)
+
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -72,39 +74,45 @@
                                 </div>
                             </td>
                             <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                <div class="text-base font-semibold text-gray-900 dark:text-white">mohamed</div>
+                                <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $employee->en_name }}</div>
                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">category</div>
                             </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">mohamed@gmail.com	</td>
-                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">01201218354</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">ilaw</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Merchandise Displayer OR Window Trimmer</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">2023-09-11 13:08:52</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->email}}</td>
+                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $employee->phone }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->company->name }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->jobTitle->name}}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->created_at }}</td>
 
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Action <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                     </svg>
                                     </button>
-                                    
+
                                     <!-- Dropdown menu -->
                                     <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                                           <li>
-                                            <a href="{{ route('employee.show') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
+                                            <a href="{{ route('employee.show', $employee->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
                                           </li>
                                           <li>
-                                            <a href="{{ route('employee.edit') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                            <a href="{{ route('employee.edit', $employee->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                           </li>
                                           <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+
+                                            <form action="{{ route('employee.destroy', $employee->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item"><i class="fa-solid fa-trash fa-lg p-2"></i>delete</button>
+                                                </form>
                                           </li>
 
                                         </ul>
                                     </div>
                             </td>
                         </tr>
-                      
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>

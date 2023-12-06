@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\Frontend\Sponsore\SponsoreController;
+use App\Http\Controllers\Frontend\Employees\EmployerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,18 +63,18 @@ Route::get('/dashboard/company/files/show', function () {
 
 
 //employee
-Route::get('/dashboard/employee', function () {
-    return view('user.employee.index');
-})->middleware(['auth', 'verified'])->name('employee');
-Route::get('/dashboard/employee/show', function () {
-    return view('user.employee.show');
-})->middleware(['auth', 'verified'])->name('employee.show');
-Route::get('/dashboard/employee/create', function () {
-    return view('user.employee.create');
-})->middleware(['auth', 'verified'])->name('employee.create');
-Route::get('/dashboard/employee/edit', function () {
-    return view('user.employee.edit');
-})->middleware(['auth', 'verified'])->name('employee.edit');
+// Route::get('/dashboard/employee', function () {
+//     return view('user.employee.index');
+// })->middleware(['auth', 'verified'])->name('employee');
+// Route::get('/dashboard/employee/show', function () {
+//     return view('user.employee.show');
+// })->middleware(['auth', 'verified'])->name('employee.show');
+// Route::get('/dashboard/employee/create', function () {
+//     return view('user.employee.create');
+// })->middleware(['auth', 'verified'])->name('employee.create');
+// Route::get('/dashboard/employee/edit', function () {
+//     return view('user.employee.edit');
+// })->middleware(['auth', 'verified'])->name('employee.edit');
 
 //employee files
 Route::get('/dashboard/employee/files/create', function () {
@@ -120,4 +121,7 @@ Route::get('/dashboard/sponsored/files/show', function () {
 
 //sponsored controller
 Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
+
+//employees 
+Route::resource('dashboard/employee',EmployerController::class )->middleware(['auth', 'verified']);
 

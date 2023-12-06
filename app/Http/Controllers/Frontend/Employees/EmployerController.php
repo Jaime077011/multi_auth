@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Dashboard\Employees;
+namespace App\Http\Controllers\Frontend\Employees;
 
 // use App\Events\AddEmployee as EventsAddEmployee;
 use App\Http\Controllers\Controller;
@@ -21,10 +21,7 @@ use Illuminate\Notifications\Notifiable;
 
 class EmployerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         $companies = Company::where('user_id', auth()->user()->id)->orderBy('id')->get();
         $job_titles = jobTitle::all();
@@ -32,10 +29,10 @@ class EmployerController extends Controller
         if($request->company){
             $employees = Employer::where('company_id', $request->company)->orderBy('created_at', 'desc')->paginate(5);
         }
-        return view('user.employee.index', compact('employees', 'companies', 'job_titles'));
+        return view('frontend.dashboard.pages.employee.index', compact('employees', 'companies', 'job_titles'));
 
-       
-  
+
+
     }
 
     /**
@@ -46,7 +43,7 @@ class EmployerController extends Controller
         $compaines = Company::where('user_id', auth()->user()->id)->orderBy('id')->get();
         $nationalities = Nationality::all();
         $job_titles = jobTitle::all();
-        return view('user.employee.create', compact('compaines', 'nationalities', 'job_titles'));
+        return view('frontend.dashboard.pages.employee.create', compact('compaines', 'nationalities', 'job_titles'));
     }
 
     /**
@@ -64,21 +61,26 @@ class EmployerController extends Controller
             'nationality_id' => 'required|exists:nationalities,id',
             'job_title_id' => 'required|exists:job_titles,id',
          ]);
-        // $user_id = auth()->user()->id;
-  
-        $employer = Employer::create($request->all());
+
+         $data = $request->all() ;
+
+         $data['user_id']= Auth::id() ;
+
+         $user_id = auth()->user()->id;
+
+        $employer = Employer::create($data);
         // $employer->notify(new addEmployee($employer));
         // $users = User::all();
-       
+
         //  $admins=Admin::all();
         //  $user=User::find(Auth::user()->id);
         //  event(new EventsAddEmployee($employer));
 
-       
-        //  Notification::send($admins,new addEmployee($employer));
-      
 
-      
+        //  Notification::send($admins,new addEmployee($employer));
+
+
+
 
 
 
@@ -89,25 +91,25 @@ class EmployerController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    
+
     {
-       
-        
+
+
         $employer = Employer::findOrFail($id);
-   
+
         $files = EmployerFile::where('employer_id', $id)->orderBy('created_at', 'desc')->get();
-       
+
 
 
         // $getID= DB::table('notifications')->where('data->newemployee_id',12)->pluck('id');
-  
+
         // DB::table('notifications')->where('id', $getID)->update(['read_at'=>now()]);
-        
-      
-         auth()->user()->unreadNotifications->markAsRead();
 
 
-        return view('user.employee.show', compact('employer', 'files'));
+        //  auth()->user()->unreadNotifications->markAsRead();
+
+
+        return view('frontend.dashboard.pages.employee.show', compact('employer', 'files'));
     }
 
     /**
@@ -117,7 +119,7 @@ class EmployerController extends Controller
     {
         $employer = Employer::findOrFail($id);
 
-        return view('user.employee.edit', compact('employer'));
+        return view('frontend.dashboard.pages.employee.edit', compact('employer'));
     }
 
     /**
@@ -126,15 +128,15 @@ class EmployerController extends Controller
     public function update(Request $request, string $id)
     {
 
-        
+
         $employer = Employer::findOrFail($id);
-  
+
         $request->validate([
             'en_name' => 'required|string|max:255',
             'ar_name' => 'required|string|max:255',
             'email' => 'required|email|unique:employers,email,' . $employer->id,
             'phone' => 'required|regex:/[0-9]+/',
-            
+
          ]);
 
         $employer->update($request->all());
@@ -152,5 +154,4 @@ class EmployerController extends Controller
 
         return redirect()->route('employee.index')->with('success', 'Company deleted successfully.');
     }
- 
 }
