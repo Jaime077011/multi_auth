@@ -18,9 +18,7 @@ class CountriesSeeder extends Seeder
         $country = array(
             array('id' => '1', 'name' => 'مصر', 'created_at' => '2021-04-01 02:47:01', 'updated_at' => '2021-04-03 04:49:31'),
             array('id' => '2', 'name' => 'الامارات العربيه المتحده', 'created_at' => '2021-04-01 02:47:01', 'updated_at' => '2021-04-03 04:49:31'),
-
         );
-
-        DB::table('countries')->insert($country);  
+        DB::table('countries')->insert($country);
         }
 }

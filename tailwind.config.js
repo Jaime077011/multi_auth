@@ -33,3 +33,6 @@ module.exports = {
         require('flowbite/plugin')
     ],
   }
+//   module.exports = {
+//     prefix: 'tw-',
+//   }
