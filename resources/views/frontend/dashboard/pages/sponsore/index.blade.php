@@ -24,9 +24,10 @@
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Sponsored</h1>
             <a href="{{ route('sponsore.create') }}" id="createProductButton" class="text-white bg-blue-700 hover:bg-yellow-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-          Add new Sponsored
+                Add new Sponsored
             </a>
         </div>
+
     </div>
 </div>
 <div class="flex flex-col">
@@ -66,6 +67,8 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                        @foreach ($sponsored as $sponsore)
+
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -75,15 +78,15 @@
                                 </div>
                             </td>
                             <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                <div class="text-base font-semibold text-gray-900 dark:text-white">gamal</div>
+                                <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $sponsore->en_name }}</div>
                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">category</div>
                             </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">ceo@ilaw.ae</td>
-                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">01201218354</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Merchandise Displayer OR Window Trimmer</td>
-                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">ahmed</td>
-                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">BROTHER</td>
-                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">2023-09-04 13:46:15</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $sponsore->email}}</td>
+                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $sponsore->phone }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $sponsore->jobTitle->name}}</td>
+                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $sponsore->Employer->en_name}}</td>
+                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $sponsore->relative_relation }}</td>
+                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $sponsore->created_at }}</td>
 
 
                             <td class="p-4 space-x-2 whitespace-nowrap">
@@ -91,25 +94,28 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                     </svg>
                                     </button>
-                                    
+
                                     <!-- Dropdown menu -->
                                     <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                                           <li>
-                                            <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
+                                            <a href="{{  route('sponsore.show', $sponsore->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
                                           </li>
                                           <li>
-                                            <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                            <a href="{{  route('sponsore.edit', $sponsore->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                           </li>
-                                          <li>
-                                            <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                                          </li>
+                                          <form action="{{ route('sponsore.destroy', $sponsore->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="dropdown-item"><i class="fa-solid fa-trash fa-lg p-2"></i>{{__('Delete')}}</button>
+                                            </form>
 
                                         </ul>
                                     </div>
                             </td>
                         </tr>
-                      
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>

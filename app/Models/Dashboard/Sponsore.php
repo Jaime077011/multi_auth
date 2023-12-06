@@ -5,6 +5,8 @@ namespace App\Models\Dashboard;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Company ;
+use App\Models\Nationality ;
 
 class Sponsore extends Model
 {

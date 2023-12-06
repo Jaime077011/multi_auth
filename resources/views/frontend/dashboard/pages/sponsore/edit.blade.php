@@ -3,27 +3,32 @@
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Edit Sponsored</h2>
-        <form action="#">
+        <form action="{{route('sponsore.update', $sponsored)}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <input name="user_id" value="{{ auth()->user()->id }}" type="hidden"   class="form-control" id="exampleFormControlInput1" placeholder="">
+
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="w-full">
                     <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">English Name</label>
-                    <input type="text" name="en_name"  required id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="English Name" required="">
+                    <input type="text" name="en_name" value="{{$sponsored->en_name}}" required id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="English Name" required="">
                 </div>
                 <div class="w-full">
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Arabic Name</label>
-                    <input type="text" name="ar_name"  required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Arabic Name" required="">
+                    <input type="text" value="{{$sponsored->ar_name}}" name="ar_name"  required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Arabic Name" required="">
                 </div>
                 <div class="w-full">
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                    <input type="email" name="email" required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email" required="">
+                    <input type="email" name="email" value="{{$sponsored->email}}" required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email" required="">
                 </div>
                 <div class="w-full">
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                    <input type="text" name="phone" required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone Number" required="">
+                    <input type="text" value="{{$sponsored->phone}}" name="phone" required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone Number" required="">
                 </div>
                 <div>
                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">relative_relation</label>
-                    <input type="text" name="relative_relation" required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone Number" required="">
+                    <input type="text"  value="{{$sponsored->relative_relation}}" name="relative_relation" required id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="relative_relation
+                    " required="">
                 </div>
 
                 <!-- <div>

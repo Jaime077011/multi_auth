@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Frontend\Sponsore;
 
+
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Dashboard\Employer;
 use App\Models\Dashboard\EmployerFile;
 use App\Models\Dashboard\jobTitle;
@@ -20,12 +22,12 @@ class SponsoreController extends Controller
     {
         $employees = Employer::where('user_id', auth()->user()->id)->orderBy('id')->get();
 
-        $sponsore = Sponsore::with('user')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        $sponsored = Sponsore::with('user')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
         if($request->employer){
-            $sponsored = Sponsore::where('employer_id', $request->employer)->orderBy('created_at', 'desc')->paginate(25);
+            $sponsored = Sponsore::where('employer_id', $request->employer)->orderBy('created_at', 'desc')->paginate(5);
         }
-        return view('user.sponsored.index', compact('sponsore', 'employees'));
+        return view('frontend.dashboard.pages.sponsore.index', compact('sponsored', 'employees'));
 
     }
 
@@ -34,11 +36,10 @@ class SponsoreController extends Controller
      */
     public function create()
     {
-
         $employers = Employer::where('user_id', auth()->user()->id)->orderBy('id')->get();
         $nationalities = Nationality::all();
         $job_titles = jobTitle::all();
-        return view('user.sponsored.show', compact('employers', 'nationalities', 'job_titles'));
+        return view('frontend.dashboard.pages.sponsore.create', compact('employers', 'nationalities', 'job_titles'));
     }
 
     /**
@@ -59,7 +60,7 @@ class SponsoreController extends Controller
         ]);
         $sponsored = Sponsore::create($request->all());
 
-        return redirect()->route('user.sponsored.index')->with('success', 'Sponsore created successfully.');
+        return redirect()->route('sponsore.index')->with('success', 'Sponsore created successfully.');
     }
 
     /**
@@ -70,14 +71,14 @@ class SponsoreController extends Controller
         $sponsore = Sponsore::findOrFail($id);
         $files = SponsoreFile::where('sponsore_id', $id)->orderBy('created_at', 'desc')->get();
 
-        return view('user.sponsored.show', compact('sponsore', 'files'));
+        return view('frontend.dashboard.pages.sponsore.show', compact('sponsore', 'files'));
     }
     public function show_single(string $id)
     {
 
         $sponsored = Sponsore::where('employer_id', $id)->orderBy('created_at', 'desc')->get();
 
-        return view('user.sponsored.show_employer_sponsored', compact('sponsored'));
+        return view('frontend.dashboard.pages.sponsore.show_employer_sponsored', compact('sponsored'));
 
     }
 
@@ -90,7 +91,7 @@ class SponsoreController extends Controller
         $employers = Employer::where('user_id', auth()->user()->id)->orderBy('id')->get();
         $nationalities = Nationality::all();
         $job_titles = jobTitle::all();
-        return view('user.sponsored.edit', compact('sponsored', 'employers', 'nationalities', 'job_titles'));
+        return view('frontend.dashboard.pages.sponsore.edit', compact('sponsored', 'employers', 'nationalities', 'job_titles'));
     }
 
     /**
@@ -111,7 +112,7 @@ class SponsoreController extends Controller
         $sponsored = Sponsore::findOrFail($id);
         $sponsored->update($request->all());
 
-        return redirect()->route('user.sponsored.index')->with('success', 'sponsored updated successfully.');
+        return redirect()->route('sponsore.index')->with('success', 'sponsored updated successfully.');
     }
 
     /**
@@ -119,10 +120,9 @@ class SponsoreController extends Controller
      */
     public function destroy(string $id)
     {
-        dd("welcome");
         $sponsored = Sponsore::findOrFail($id);
         $sponsored->delete();
 
-        return redirect()->route('user.sponsored.index')->with('success', 'sponsore deleted successfully.');
+        return redirect()->route('sponsore.index')->with('success', 'sponsore deleted successfully.');
     }
 }
