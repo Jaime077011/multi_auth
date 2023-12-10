@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\Frontend\Sponsore\SponsoreController;
 use App\Http\Controllers\Frontend\Employees\EmployerController;
+use App\Http\Controllers\Frontend\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,8 +124,13 @@ Route::get('/dashboard/sponsored/files/show', function () {
 //sponsored controller
 Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
 
-//employees 
+//employees
 Route::resource('dashboard/employee',EmployerController::class )->middleware(['auth', 'verified']);
 //companies
 Route::resource('dashboard/companies', CompanyController::class);
 
+
+// Payment
+Route::get('dashboard/payment', [PaymentController::class, 'index'])->name('checkout');
+Route::post('/session',  [PaymentController::class, 'session'])->name('session');
+Route::get('/success', [PaymentController::class, 'success'])->name('success');

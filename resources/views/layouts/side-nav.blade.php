@@ -55,6 +55,17 @@
               </a>
             </li>
 
+
+            <li>
+                <form action="/session" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                   <input type='hidden' name="total" value="1000">
+                   <input type='hidden' name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th">
+                   <button class="btn btn-success" type="submit" id="checkout-live-button"><i class="fa fa-money"></i> Pay Now</button>
+                   </form>
+              </li>
+
+
             {{-- <li>
               <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" aria-controls="dropdown-layouts" data-collapse-toggle="dropdown-layouts">
                   <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
