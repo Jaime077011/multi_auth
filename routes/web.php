@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
+
 
 Route::middleware(['auth','role:super'])->group(function () {
     Route::get('/super/dashboard', [SuperController::class, 'SuperDashboard'])->name('super.dashboard');
