@@ -22,7 +22,7 @@ class CompanyController extends Controller
         // $form = CompanyRequests::findOrFail(1)->content;
         // dd($form);
 
-        return view('frontend.dashboard.pages.company.index', compact('companies'));
+        return view('frontend.dashboard.pages.Company.index', compact('companies'));
     }
 
     /**
@@ -66,7 +66,7 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $data = json_decode($company->company_data, true);
         $files = CompanyFile::where('company_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('frontend.dashboard.pages.company.show', compact('company', 'data', 'files'));
+        return view('frontend.dashboard.pages.Company.show', compact('company', 'data', 'files'));
     }
 
     /**
@@ -97,7 +97,7 @@ class CompanyController extends Controller
             'mobile' => 'sometimes|required|string|max:15',
             'country_id' => 'sometimes|required|exists:countries,id',
         ]);
-        
+
         $company = Company::findOrFail($id);
         $company->update($request->all());
 
