@@ -1,30 +1,82 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
-<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="max-w-screen-md mb-8 lg:mb-16">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Company Info</h2>
+        </div>
+        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Company Name</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $company->name }}</p>
+            </div>
+            <div>
+
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Company Location</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $company->country->name }}</p>
+            </div>
+            <div>
+
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Company Capital</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $data['capital'] ?? '' }} </p>
+            </div>
+            <div>
+
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Company Email</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $company->user->email }}</p>
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Company Phone</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $company->mobile }}</p>
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Company Activity</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $data['activity'] ?? '' }}</p>
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Is The Company Regesterd in other country?</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $data['regesterd'] ?? '' }}</p>
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Notes</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $data['note'] ??'' }}</p>
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Partners</h3>
+                <p class="text-gray-500 dark:text-gray-400">{{ $data['partners'] ?? '' }}</p>
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Partners</h3>
+                @isset($data['Patner_name'])
+                @forelse($data['Patner_name'] as $name)
+                <h3 class="mt-3">{{$name}}</h3>
+                @empty
+                <h6>No parteners</h6>
+            @endforelse
+                @endisset
+
+
+            </div>
+            <div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Partners Countries</h3>
+                @isset($data['Patner_country'])
+                @foreach($data['Patner_country'] as $country)
+                <h3 class="mt-3">{{$country}}</h3>
+            @endforeach
+            @endisset
+
+                    </div>
+        </div>
+    </div>
+  </section>
+  <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
         <div class="mb-4">
-            <nav class="flex mb-5" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-                  <li class="inline-flex items-center">
-                    <a href="#" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
-                      <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                      Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <div class="flex items-center">
-                      <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                      <a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Companies</a>
-                    </div>
-                  </li>
-
-                </ol>
-            </nav>
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Companies</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All files</h1>
             <button id="createProductButton" class="text-white bg-blue-700 hover:bg-yellow-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                Add new company
+                Add new file
             </button>
         </div>
     </div>
@@ -43,22 +95,17 @@
                                 </div>
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY NAME
+                                FILE NAME
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY OWNER
+                                START DATE
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY COUNTRY
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                CREATED AT
+                                END DATE
                             </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        @foreach ($companies as $company)
-
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -68,21 +115,19 @@
                                 </div>
                             </td>
                             <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $company->name }}</div>
+                                <div class="text-base font-semibold text-gray-900 dark:text-white">name</div>
                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">category</div>
                             </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $company->user->name }}</td>
-                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $company->country->name }}</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $company->created_at }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">technology</td>
+                            <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">description</td>
 
 
                             <td class="p-4 space-x-2 whitespace-nowrap">
-                                <a href="{{ route('companies.show', $company->id) }}"  type="button" id="updateProductButton" data-drawer-target="drawer-update-product-default" data-drawer-show="drawer-update-product-default" aria-controls="drawer-update-product-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                    VIEW
-                                </a>
+                                <button type="button" id="updateProductButton" data-drawer-target="drawer-update-product-default" data-drawer-show="drawer-update-product-default" aria-controls="drawer-update-product-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    ACTION
+                                </button>
                             </td>
                         </tr>
-                        @endforeach
 
                     </tbody>
                 </table>
