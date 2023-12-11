@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\backend\Admin;
+namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
-use App\Models\Dashboard\CompanyFile;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class CompanyController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-        $companies = Company::with('user', 'country')->orderBy('created_at', 'desc')->paginate(5);
+        Gate::authorize('users.view');
 
-        return view('backend.pages.company.index', compact('companies'));
+        $request = request();
+
+        $users =User::search($request->query())->paginate(8) ;
+
+        return view('backend.pages.users.index',compact('users')) ;
     }
 
     /**
@@ -25,7 +28,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -39,12 +42,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        $company = Company::findOrFail($id);
-        $data = json_decode($company->company_data, true);
-        $files = CompanyFile::where('company_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('backend.pages.company.show', compact('company', 'data', 'files'));
+        return view('backend.pages.users.show',compact('user')) ;
+
     }
 
     /**

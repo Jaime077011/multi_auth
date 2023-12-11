@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('wallet')->default(0);
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->morphs('authorizable');
+            $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
+
+            $table->primary(['authorizable_id', 'authorizable_type', 'role_id']);
 
         });
     }
@@ -22,9 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('wallet');
-
-        });
+        Schema::dropIfExists('role_user');
     }
 };
