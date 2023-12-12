@@ -3,27 +3,26 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Gate::authorize('users.view');
+        // Gate::authorize('admins.view');
 
         $request = request();
 
-        $users =User::where('role','user')->search($request->query())->paginate(8) ;
+        $admins =User::where('role','admin')->search($request->query())->paginate(8) ;
 
-        return view('backend.pages.users.index',compact('users')) ;
+        return view('backend.pages.admins.index',compact('admins')) ;
     }
 
     /**
@@ -31,56 +30,68 @@ class UserController extends Controller
      */
     public function create()
     {
-        Gate::authorize('users.create');
+        // Gate::authorize('users.create');
 
-         return view('backend.pages.users.create') ;
+        $roles = Role::all() ;
+        return view('backend.pages.admins.create',compact('roles')) ;
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $user= User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
-            'phone'=>$request->phone ,
-            'address'=>$request->address
-        ]);
+
+            'role'=>'admin'
+         ]);
+
+        $user->roles()->attach($request->roles)  ;
 
 
 
-
-         return redirect()->route('users.index')->with('success','User Added Successfully') ;
+         return redirect()->route('admins.index')->with('success','User Added Successfully') ;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(string $id)
     {
-        return view('backend.pages.users.show',compact('user')) ;
+        $user  = User::findOrFail($id) ;
+        return view('backend.pages.admins.show',compact('user')) ;
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(string $id)
     {
         Gate::authorize('users.update');
 
+        $user = User::findOrFail($id) ;
 
-        return view('backend.pages.users.edit',compact('user')) ;
+        $roles = Role::all();
+        $user_roles = $user->roles()->pluck('id')->first();
+        // dd($user_roles) ;
+
+         return view('backend.pages.admins.edit',compact('user','user_roles','roles')) ;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, string $id)
     {
 
+        $user = User::findOrFail($id) ;
         $data = $request->all() ;
 
         if( empty( $data['password'] ) && empty( $data['password_confirmation'] )  ){
@@ -96,20 +107,24 @@ class UserController extends Controller
             'phone'=>$request->phone ,
             'address'=>$request->address
         ]) ;
-        
+        $user->roles()->sync($request->roles);
 
-        return redirect()->route('users.index')->with('success','User Updated Successfully') ;
+
+
+        return redirect()->route('admins.index')->with('success','User Updated Successfully') ;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
+
         Gate::authorize('users.delete');
 
+        $user= User::FindOrFail($id) ;
 
         $user->delete() ;
-        return redirect()->route('users.index')->with('success','User Deleted Successfully') ;
+        return redirect()->route('admins.index')->with('success','Admin Deleted Successfully') ;
     }
 }

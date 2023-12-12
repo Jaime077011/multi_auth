@@ -27,7 +27,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                                 <a href="#"
-                                    class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Users</a>
+                                    class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Admins</a>
                             </div>
                         </li>
 
@@ -35,13 +35,13 @@
                 </nav>
             </div>
             <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
-                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Users</h1>
-                <a href="{{ route('users.create') }}" id="createProductButton"
+                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">admins</h1>
+                <a href="{{ route('admins.create') }}" id="createProductButton"
                     class="text-white bg-blue-700 hover:bg-yellow-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                     type="button" data-drawer-target="drawer-create-product-default"
                     data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default"
                     data-drawer-placement="right">
-                    Add new User
+                    Add New Admin
                 </a>
             </div>
         </div>
@@ -80,7 +80,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                            @foreach ($users as $user)
+                            @foreach ($admins as $admin)
                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
@@ -91,17 +91,17 @@
                                     </td>
                                     <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                                         <div class="text-base font-semibold text-gray-900 dark:text-white">
-                                            {{ $user->id }}
+                                            {{ $admin->id }}
                                         </div>
                                      </td>
                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->name }}</td>
+                                        {{ $admin->name }}</td>
                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->email }}</td>
+                                        {{ $admin->email }}</td>
 
 
                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d') }}</td>
+                                        {{ \Carbon\Carbon::parse($admin->created_at)->format('Y-m-d') }}</td>
 
                                     <td class="p-4 space-x-2 whitespace-nowrap">
                                         <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover"
@@ -120,16 +120,16 @@
                                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                                 aria-labelledby="dropdownHoverButton">
                                                 <li>
-                                                    <a href="{{ route('users.show', $user->id) }}"
+                                                    <a href="{{ route('admins.show', $admin->id) }}"
                                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('users.edit', $user->id) }}"
+                                                    <a href="{{ route('admins.edit', $admin->id) }}"
                                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                 </li>
                                                 <li>
 
-                                                    <form action="{{ route('users.destroy', $user->id) }}"
+                                                    <form action="{{ route('admins.destroy', $admin->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('delete')
