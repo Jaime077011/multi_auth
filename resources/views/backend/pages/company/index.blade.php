@@ -24,9 +24,9 @@
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Companies</h1>
-            <button id="createProductButton" class="text-white bg-blue-700 hover:bg-yellow-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
+            <a href="{{route('all_companies.create')}}"  id="createProductButton" class="text-white bg-blue-700 hover:bg-yellow-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"   data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
                 Add new company
-            </button>
+            </a>
         </div>
     </div>
 </div>
@@ -78,9 +78,42 @@
 
 
                             <td class="p-4 space-x-2 whitespace-nowrap">
-                                <a href="{{  route('all_companies.show', $company->id)  }}"  type="button" id="updateProductButton" data-drawer-target="drawer-update-product-default" data-drawer-show="drawer-update-product-default" aria-controls="drawer-update-product-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                    VIEW
-                                </a>
+                                <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover"
+                                    data-dropdown-trigger="hover"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    type="button">Action <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 4 4 4-4" />
+                                    </svg>
+                                </button>
+
+                                <!-- Dropdown menu -->
+                                <div id="dropdownHover"
+                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                        aria-labelledby="dropdownHoverButton">
+                                        <li>
+                                            <a href="{{ route('all_companies.show', $company->id) }}"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('all_companies.edit', $company->id) }}"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                        </li>
+                                        <li>
+
+                                            <form action="{{ route('all_companies.destroy', $company->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item"><i
+                                                        class="fa-solid fa-trash fa-lg p-2"></i>delete</button>
+                                            </form>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
