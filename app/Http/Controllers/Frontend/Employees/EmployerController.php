@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\Notifiable;
+use App\Events\AddEmployee as EventsAddEmployee;
+
 
 
 
@@ -51,6 +53,8 @@ class EmployerController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
             'en_name' => 'required|string|max:255',
             'ar_name' => 'required|string|max:255',
@@ -74,7 +78,7 @@ class EmployerController extends Controller
 
         //  $admins=Admin::all();
         //  $user=User::find(Auth::user()->id);
-        //  event(new EventsAddEmployee($employer));
+         event(new EventsAddEmployee($employer));
 
 
         //  Notification::send($admins,new addEmployee($employer));

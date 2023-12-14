@@ -96,7 +96,7 @@ class UserController extends Controller
             'phone'=>$request->phone ,
             'address'=>$request->address
         ]) ;
-        
+
 
         return redirect()->route('users.index')->with('success','User Updated Successfully') ;
     }

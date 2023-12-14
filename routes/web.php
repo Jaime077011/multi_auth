@@ -128,6 +128,7 @@ Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['au
 
 //employees
 Route::resource('dashboard/employee',EmployerController::class )->middleware(['auth', 'verified']);
+
 //companies
 Route::resource('dashboard/companies', CompanyController::class);
 

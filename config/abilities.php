@@ -1,6 +1,6 @@
 <?php
 return [
-    
+
     'companies.view'=>'view companies' ,
     'companies.show'=>'create companies' ,
     'companies.update'=>'Update companies' ,
@@ -20,6 +20,11 @@ return [
     'roles.update'=>'Update roles' ,
     'roles.delete'=>'Delete roles' ,
 
+
+    'admins.view'=>'view admins' ,
+    'admins.create'=>'create admins' ,
+    'admins.update'=>'Update admins' ,
+    'admins.delete'=>'Delete admins' ,
 
 
 
