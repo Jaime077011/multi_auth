@@ -13,7 +13,10 @@
                 </nav>
             </nav>
             {{-- Search input --}}
-            {{-- <input type="text" class="messenger-search" placeholder="Search" /> --}}
+            @if(Auth::user()->role=='super' || Auth::user()->role=='admin')
+            <input type="text" class="messenger-search" placeholder="Search" />
+
+            @endif
             {{-- Tabs --}}
             {{-- <div class="messenger-listView-tabs">
                 <a href="#" class="active-tab" data-view="users">
