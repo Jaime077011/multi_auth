@@ -7,6 +7,7 @@ use App\Http\Controllers\SuperController;
 use App\Http\Controllers\Frontend\Sponsore\SponsoreController;
 use App\Http\Controllers\Frontend\Employees\EmployerController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\PaymentNotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,3 +138,8 @@ Route::resource('dashboard/companies', CompanyController::class);
 Route::get('dashboard/payment', [PaymentController::class, 'index'])->name('checkout');
 Route::post('/session',  [PaymentController::class, 'session'])->name('session');
 Route::get('/success', [PaymentController::class, 'success'])->name('success');
+
+
+// notifications with ajax
+
+Route::post('/mark-notifications-as-read', [PaymentNotificationsController::class, 'markAsRead'])->name('mark-notifications-as-read');

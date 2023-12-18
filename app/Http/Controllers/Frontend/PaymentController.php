@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\Payment;
 use App\Http\Controllers\Controller;
+use App\Notifications\PaymentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -48,6 +50,8 @@ class PaymentController extends Controller
 
          $user->wallet +=$totalAmount ;
          $user->save();
+
+         $user->notify(new PaymentNotification($user,$totalAmount));
 
          Session::forget('total_amount');
 
