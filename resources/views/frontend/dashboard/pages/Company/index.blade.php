@@ -22,8 +22,8 @@
             </nav>
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Companies</h1>
-            
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{__('Companies')}}</h1>
+
         </div>
     </div>
 </div>
@@ -41,16 +41,16 @@
                                 </div>
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY NAME
+                                {{__('Company Name')}}
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY OWNER
+                                {{__('Company Owner')}}
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY COUNTRY
+                                {{__('Company Country')}}
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                CREATED AT
+                                {{__('Created At')}}
                             </th>
                         </tr>
                     </thead>
@@ -76,7 +76,7 @@
 
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <a href="{{ route('companies.show', $company->id) }}"  type="button" id="updateProductButton" data-drawer-target="drawer-update-product-default" data-drawer-show="drawer-update-product-default" aria-controls="drawer-update-product-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                    VIEW
+                                    {{__('View')}}
                                 </a>
                             </td>
                         </tr>

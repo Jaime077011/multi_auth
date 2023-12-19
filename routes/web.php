@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\Sponsore\SponsoreController;
 use App\Http\Controllers\Frontend\Employees\EmployerController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\PaymentNotificationsController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +125,11 @@ Route::get('/dashboard/sponsored/files/show', function () {
 })->middleware(['auth', 'verified'])->name('sponsored-files.show');
 
 
+
+
+
+Route::group(['prefix'=> LaravelLocalization::setLocale()],function(){
+
 //sponsored controller
 Route::resource('dashboard/sponsore',SponsoreController::class)->middleware(['auth', 'verified']);
 
@@ -140,6 +146,10 @@ Route::post('/session',  [PaymentController::class, 'session'])->name('session')
 Route::get('/success', [PaymentController::class, 'success'])->name('success');
 
 
-// notifications with ajax
+// notifications
 
 Route::post('/mark-notifications-as-read', [PaymentNotificationsController::class, 'markAsRead'])->name('mark-notifications-as-read');
+
+
+
+}) ;
