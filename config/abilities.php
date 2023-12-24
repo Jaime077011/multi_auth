@@ -1,7 +1,7 @@
 <?php
 return [
 
-    'companies.view'=>'view companies' ,
+    'companies.view'=>'view companies',
     'companies.show'=>'create companies' ,
     'companies.update'=>'Update companies' ,
     'companies.delete'=>'Delete companies' ,

@@ -25,7 +25,7 @@
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Companies</h1>
             <a href="{{route('all_companies.create')}}"  id="createProductButton" class="text-white bg-blue-700 hover:bg-yellow-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"   data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-                Add new company
+                {{__('Add New Company')}}
             </a>
         </div>
     </div>
@@ -44,16 +44,16 @@
                                 </div>
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY NAME
+                                {{__('Company Name')}}
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY OWNER
+                                {{__('Company Owner')}}
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                COMPANY COUNTRY
+                                {{__('Company Country')}}
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                CREATED AT
+                                {{__('Created At')}}
                             </th>
                         </tr>
                     </thead>
@@ -70,8 +70,7 @@
                             </td>
                             <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                                 <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $company->name }}</div>
-                                <div class="text-sm font-normal text-gray-500 dark:text-gray-400">category</div>
-                            </td>
+                             </td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $company->user->name }}</td>
                             <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">{{ $company->country->name }}</td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $company->created_at }}</td>
@@ -81,7 +80,7 @@
                                 <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover"
                                     data-dropdown-trigger="hover"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                    type="button">Action <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                    type="button">{{__('Action')}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="m1 1 4 4 4-4" />
@@ -95,11 +94,11 @@
                                         aria-labelledby="dropdownHoverButton">
                                         <li>
                                             <a href="{{ route('all_companies.show', $company->id) }}"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Review</a>
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Review')}}</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('all_companies.edit', $company->id) }}"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Edit')}}</a>
                                         </li>
                                         <li>
 
@@ -108,7 +107,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button class="dropdown-item"><i
-                                                        class="fa-solid fa-trash fa-lg p-2"></i>delete</button>
+                                                        class="fa-solid fa-trash fa-lg p-2"></i>{{__('Delete')}}</button>
                                             </form>
                                         </li>
 

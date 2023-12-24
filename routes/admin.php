@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\Admin\HomeController;
 use App\Http\Controllers\Backend\Admin\RolesController;
 use App\Http\Controllers\Backend\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 // Admin Authentication
@@ -21,7 +22,11 @@ Route::post('admin/login', [AuthenticatedSessionController::class, 'storeAdmin']
 });
 
 //admin main functions
+Route::group(['prefix'=> LaravelLocalization::setLocale()],function(){
+
 Route::prefix('admin')->middleware(['UserType'])->group(function () {
+
+
 Route::get('/', [HomeController::class,'index'])->name('admin.home');
 //companies management
 Route:: resource('all_companies',CompanyController::class);
@@ -48,4 +53,9 @@ Route::resource('admins',AdminController::class) ;
 
 
 });
+}) ;
+
+
+
+
 

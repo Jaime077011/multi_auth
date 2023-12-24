@@ -89,7 +89,7 @@ class CompanyController extends Controller
 
         $countries = Country::get() ;
         $data = json_decode($company->company_data, true);
-        return view ('backend.pages.company.edit',compact('company','countries','data')) ;
+         return view ('backend.pages.company.edit',compact('company','countries','data')) ;
     }
 
     /**
